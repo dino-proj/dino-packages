@@ -5,6 +5,5 @@ lib
 types
 *.local
 .vscode
-yarn.lock
 yarn-error.log
 .dist
