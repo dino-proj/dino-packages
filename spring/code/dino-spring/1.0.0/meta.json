@@ -1,0 +1,36 @@
+{
+  "name": "dino-spring",
+  "version": "1.0.0",
+  "description": "dino-spring 开发框架代码生成模板",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Cody Lu",
+    "email": "tuuboo@gmail.com"
+  },
+  "templates": {
+    "entity": {
+      "type": "spring"
+    },
+    "vo": {
+      "type": "spring"
+    },
+    "dao": {
+      "type": "spring"
+    },
+    "service": {
+      "type": "spring"
+    },
+    "controller": {
+      "type": "spring"
+    }
+  },
+  "modules": {
+    "crud": {
+      "templates": [
+        {
+          "name": "entity"
+        }
+      ]
+    }
+  }
+}

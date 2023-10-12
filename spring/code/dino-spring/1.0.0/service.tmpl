@@ -1,0 +1,25 @@
+package {{config.package}}.{{config.modulesPackage}}.{{lower schema.name}};
+
+import org.dinospring.core.service.impl.ServiceBase;
+import org.dinospring.data.dao.CrudRepositoryBase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+{{#if config.author}}
+/**
+ *
+ * @author {{config.author.name}}
+ * @date {{context.now}}
+ */
+{{/if}}
+@Service
+public class {{cap schema.name}}Service extends ServiceBase<{{cap schema.name}}Entity, {{schema.key}}> {
+
+  @Autowired
+  private {{cap schema.name}}Repository {{schema.name}}Repository;
+
+  @Override
+  public CrudRepositoryBase<{{cap schema.name}}Entity, {{schema.key}}> repository() {
+    return {{schema.name}}Repository;
+  }
+
+}

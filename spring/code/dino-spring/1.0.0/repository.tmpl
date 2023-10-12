@@ -1,0 +1,15 @@
+package {{config.package}}.{{config.modulesPackage}}.{{lower schema.name}};
+
+import org.dinospring.data.dao.CrudRepositoryBase;
+import org.springframework.stereotype.Repository;
+{{#if config.author}}
+/**
+ *
+ * @author {{config.author.name}}
+ * @date {{context.now}}
+ */
+{{/if}}
+@Repository
+public interface {{cap schema.name}}Repository {{extends schema.base.dao context.clazz true}} {
+
+}

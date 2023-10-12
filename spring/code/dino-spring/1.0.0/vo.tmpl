@@ -1,0 +1,28 @@
+package {{config.package}}.{{config.modulesPackage}}.{{lower schema.name}};
+
+import {{#js_if "this.schema.base.vo=='UserVoBase'"}}org.dinospring.core.sys.user.UserVoBase;{{else}}org.dinospring.core.vo.VoImplBase;{{/js_if}}
+
+{{javaImport schema.voProps}}
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+{{#if config.author}}
+/**
+ *
+ * @author {{config.author.name}}
+ * @date {{context.now}}
+ */
+{{/if}}
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@Tag(name = "{{schema.title}}Vo")
+public class {{cap schema.name}}Vo {{extends schema.base.vo context.clazz}} {
+{{#each schema.voProps}}
+  @Schema(name = "{{snake name}}", description = "{{title}}")
+  private {{type}} {{camel name}};
+{{/each}}
+}

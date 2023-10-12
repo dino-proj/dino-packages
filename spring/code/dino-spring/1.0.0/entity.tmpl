@@ -1,0 +1,36 @@
+package {{config.package}}.{{config.modulesPackage}}.{{lower schema.name}};
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+{{#js_if "this.schema.base.entity=='UserEntityBase'"}}
+import org.dinospring.core.sys.user.UserEntityBase;
+{{else}}import org.dinospring.data.domain.TenantRowEntityBase;{{/js_if}}
+{{javaImport schema.entityProps}}
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+{{#if config.author}}
+/**
+ *
+ * @author {{config.author.name}}
+ * @date {{context.now}}
+ */
+{{/if}}
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@Tag(name = "{{schema.title}}Entity")
+@Entity
+@Table(name = "{{config.tablePrefix}}_{{snake schema.name}}")
+public class {{cap schema.name}}Entity {{extends schema.base.entity context.clazz}} {
+{{#each schema.entityProps}}
+  @Schema(name = "{{snake name}}", description = "{{title}}")
+  @Column(name = "{{snake name}}"{{#if size}}, length = {{size}}{{/if}}{{#js_if "this.nullable===false"}},nullable = false{{/js_if}}{{#if unique}}, unique = true{{/if}}{{colDef type}})
+  private {{type}} {{camel name}};
+{{/each}}
+}

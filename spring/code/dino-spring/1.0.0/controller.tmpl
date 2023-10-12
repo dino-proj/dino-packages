@@ -1,0 +1,57 @@
+package {{config.package}}.{{config.modulesPackage}}.{{lower schema.name}};
+
+import java.util.List;
+
+import org.dinospring.data.sql.builder.SelectSqlBuilder;
+import org.dinospring.core.controller.CrudControllerBase;
+import org.dinospring.core.service.CustomQuery;
+{{javaImport schema.reqProps schema.searchProps}}
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import {{config.package}}.{{config.modulesPackage}}.{{lower schema.name}}.{{cap schema.name}}Controller.{{cap schema.name}}Req;
+{{#if schema.hasSearch}}import {{config.package}}.{{config.modulesPackage}}.{{lower schema.name}}.{{cap schema.name}}Controller.{{cap schema.name}}Search;{{/if}}
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Data;
+{{#if config.author}}
+/**
+ *
+ * @author {{config.author.name}}
+ * @date {{context.now}}
+ */
+{{/if}}
+@CrossOrigin("*")
+@Tag(name = "{{schema.title}}接口")
+@RestController
+@RequestMapping("/v1/{tenant_id:[0-9A-Z]+}/{{lower schema.name}}")
+public class {{cap schema.name}}Controller {{extends schema.base.controller context.clazz}}{
+{{#if schema.hasSearch}}
+  @Data
+  public static class {{cap schema.name}}Search {{extends schema.base.search context.clazz}}{
+{{#each schema.searchProps}}
+    @Schema(name = "{{snake name}}", description = "{{title}}")
+    private {{type}} {{camel name}};
+{{/each}}
+
+    @Override
+    public SelectSqlBuilder buildSql(SelectSqlBuilder sql) {
+{{#each schema.searchProps}}
+      sql.{{#if_js "this.search=='eq'"}}eqIfNotBlank{{/js_if}}("{{snake name}}", {{camel name}});
+{{/each}}
+      return sql;
+    }
+
+  }
+{{/if}}
+  @Data
+  public static class {{cap schema.name}}Req {
+{{#each schema.reqProps}}
+    @Schema(name = "{{snake name}}", description = "{{title}}")
+    private {{type}} {{camel name}};
+{{/each}}
+  }
+
+}
