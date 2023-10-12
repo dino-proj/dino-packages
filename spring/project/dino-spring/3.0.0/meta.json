@@ -1,0 +1,33 @@
+{
+  "name": "dino-spring",
+  "description": "dino-spring 开发框架项目生成模板",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Cody Lu",
+    "email": "tuuboo@gmail.com"
+  },
+  "raws": [".gitignore", ".editorconfig", "p3c-ruleset.xml"],
+
+  "modules": {
+    "pom": {
+      "path": "pom_xml.tmpl",
+      "engine": "tmpl",
+      "dist": "pom.xml"
+    },
+    "applicationMain": {
+      "path": "ApplicationMain.java.tmpl",
+      "engine": "tmpl",
+      "dist": "src/main/java/{{config.packagePath}}/ApplicationMain.java"
+    }
+  },
+
+  "arguments": [
+    {
+      "scope": "project",
+      "name": "javaVersion",
+      "description": "请选择Java版本",
+      "choices": ["17", "20"],
+      "default": "17"
+    }
+  ]
+}
