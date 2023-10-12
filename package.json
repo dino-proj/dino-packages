@@ -1,0 +1,37 @@
+{
+  "name": "dino-packages",
+  "version": "1.0.0",
+  "description": "dino dev packages for dino-spring dino-vue3",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Code Lu",
+    "email": "tuuboo@gmail.com"
+  },
+  "scripts": {
+    "clean": "rimraf .dist",
+    "build": "yarn run clean && yarn run bundle",
+    "bundle": "ts-node scripts/bundle.ts .dist"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "lodash-es": "^4.17.21",
+    "ssri": "^10.0.5",
+    "tar": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.1.2",
+    "@types/lodash-es": "^4.17.9",
+    "@types/node": "^17.0.16",
+    "@types/ssri": "^7.1.2",
+    "@types/tar": "^6.1.6",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.5.5"
+  },
+  "engines": {
+    "node": " >= 14.0.0"
+  }
+}
