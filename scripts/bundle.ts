@@ -18,7 +18,7 @@ import {
   TemplateDistInfo,
 } from './types';
 
-const pckUrlPrefix = 'https://pkg.dinosdev.cn';
+const pckUrlPrefix = 'https://pkg.dinodev.cn';
 
 const tarTemplate = async (
   pType: string,
